@@ -3,12 +3,12 @@ from pygame import *
 from time import time
 from Bird import Bird
 from World import World
-from Net2_2 import Net2
+from Net2_3 import Net
 
 
 decisions = ["jump", "drop", "stay"]
 pattern = [4]
-n1 = Net2(pattern=pattern, dec=decisions, input_am=2)
+n1 = Net(pattern=pattern, dec=decisions, input_am=2)
 best_net = n1.export()
 
 score = 0
@@ -61,7 +61,7 @@ while True:
         running = True
         for a in range(player_am):
             players.append(Bird(a, screen_size[1], bird_size))
-            nets.append(Net2(dec=decisions, net=deepcopy(best_net)))
+            nets.append(Net(dec=decisions, net=deepcopy(best_net)))
             if a != 0:
                 for b in range(1000):
                     nets[-1].vari_net()

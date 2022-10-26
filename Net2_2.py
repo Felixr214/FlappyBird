@@ -85,6 +85,18 @@ class Net2:
                 self.net.append(np.ones((self.neurons_per_layer[a], self.neurons_per_layer[a + 1])))
             self.net.append(np.ones((self.neurons_per_layer[-1], self.decisions_am)))
 
+        if "fnet" in kwargs:
+            self.net = []
+            self.neurons_per_layer = []
+            self.bias = []
+            for layer in kwargs["fnet"][0]:
+                self.net.append(np.array(layer))
+                self.neurons_per_layer.append(len(layer[0]))
+            self.layers = len(self.net)
+            self.input_am = len(self.net[0])
+            for layer in kwargs["fnet"][1]:
+                self.bias.append(np.array(layer))
+
     def decide(self, inp, **kwargs):
         if type(inp) is not np.array:
             inp = np.array(inp)

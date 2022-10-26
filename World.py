@@ -30,14 +30,18 @@ class Obstacle:
 
 
 class World:
-    def __init__(self, x, y, bar=20):
+    def __init__(self, x, y, bar=20, **kwargs):
         self.x = x
         self.y = y
         self.obst = []
         self.speed = 10
         self.bar = bar
         self.gap = 150
+        if "gap" in kwargs:
+            self.gap = kwargs["gap"]
         self.distance = 300
+        if "dist" in kwargs:
+            self.distance = kwargs["dist"]
         self.last_obst = self.distance
         self.last_height = 0
 
@@ -45,9 +49,9 @@ class World:
         if self.last_obst < self.distance:
             return False
         else:
-            obs_height = randint(self.gap, self.y - self.gap)
+            obs_height = randint(0, self.y - self.gap)
             while -50 < obs_height - self.last_height < 50 and len(self.obst) != 0:
-                obs_height = randint(self.gap, self.y - self.gap)
+                obs_height = randint(0, self.y - self.gap)
             self.obst.append([Obstacle(self.x, obs_height, self.bar, self.gap),
                               Obstacle(self.x, self.y - obs_height - self.gap, self.bar, self.gap)])
             self.last_obst = 0
