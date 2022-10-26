@@ -5,12 +5,12 @@ from Bird import Bird
 from World import World
 from Net2_2 import Net2
 
-best2_400 = [[[0.536, -0.645, 0.025, 0.49], [0.814, -0.81, 0.092, -0.045]], [[0.97, -0.915], [-0.543, -0.177], [-0.81, 0.787], [-0.824, 0.719]]]
-
+best2_200 = ([[[-0.588, 0.338, 0.531, 0.657], [-0.09, -0.708, -0.205, 0.417]], [[0.09, -0.46], [-0.65, -0.385], [0.706, 0.483], [-0.474, 0.604]]], [[-0.241, -0.066, 0.629, 0.057], [-0.279, 0.178]])
+best1_200 = ([[[-0.999, 0.6], [0.574, -0.253]]], [[-0.716, -0.38]])
 
 decisions = ["jump", "stay"]
 pattern = [4]
-n1 = Net2(pattern=pattern, dec=decisions, input_am=2)
+n1 = Net2(layers=1, dec=decisions, input_am=2)
 best_net = n1.export(True)
 
 score = 0
@@ -78,7 +78,7 @@ while True:
                 if event_.key == K_SPACE:
                     pause = True
                 if event_.key == K_r:
-                    print(nets[0].export())
+                    print(nets[0].export(True))
 
         if time() - tj >= jump_cooldown:
             jumping = False
