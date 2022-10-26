@@ -5,7 +5,7 @@ from Bird import Bird
 from World import World
 from Net2_2 import Net2
 
-best2_400 = [[[-0.783, 0.62, 0.743, 0.133], [0.925, -0.167, 0.494, 0.399]], [[-0.834, -0.985], [-0.985, -0.469], [-0.34, 0.193], [-0.33, 0.444]]]
+best2_400 = [[[0.536, -0.645, 0.025, 0.49], [0.814, -0.81, 0.092, -0.045]], [[0.97, -0.915], [-0.543, -0.177], [-0.81, 0.787], [-0.824, 0.719]]]
 
 
 decisions = ["jump", "stay"]
@@ -17,7 +17,8 @@ score = 0
 highscore = 0
 generation = 0
 
-gap = 400
+gap = 200
+dist = 500
 
 fps = 60
 delay = 1 / fps
@@ -38,12 +39,12 @@ screen = display.set_mode(screen_size)
 init()
 font = font.Font('freesansbold.ttf', 24)
 
-w1 = World(screen_size[0], screen_size[1], bar_width, dist=300, gap=gap)
+w1 = World(screen_size[0], screen_size[1], bar_width, dist=dist, gap=gap)
 tj = 0
 players = []
 nets = []
 
-player_am = 1
+player_am = 50
 
 while True:
     for event_ in event.get():
@@ -58,7 +59,7 @@ while True:
         nets = []
         score = 0
         w1.obst = []
-        w1.last_obst = 300
+        w1.last_obst = dist
         running = True
         for a in range(player_am):
             players.append(Bird(a, screen_size[1], bird_size))
@@ -159,7 +160,7 @@ while True:
         screen.blit(player, (0, 25))
         screen.blit(showscore, (0, 50))
         screen.blit(showhighscore, (0, 75))
-        if score > -10:
+        if score > 10:
             while time() - t1 < delay:
                 pass
         display.update()
